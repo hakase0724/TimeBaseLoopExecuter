@@ -2,27 +2,26 @@
 
 double TimeBaseLoopExecuter::TimeAdjustment()
 {
-	// ¡‚ÌŠÔ‚ğæ“¾
+	// ä»Šã®æ™‚é–“ã‚’å–å¾—
 	QueryPerformanceCounter(&mTimeEnd);
-	// (¡‚ÌŠÔ - ‘OƒtƒŒ[ƒ€‚ÌŠÔ) / ü”g” = Œo‰ßŠÔ(•b’PˆÊ)
+	// (ä»Šã®æ™‚é–“ - å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ™‚é–“) / å‘¨æ³¢æ•° = çµŒéæ™‚é–“(ç§’å˜ä½)
 	mFrameTime = static_cast<double>(mTimeEnd.QuadPart - mTimeStart.QuadPart) / static_cast<double>(mTimeFreq.QuadPart);
 	double fps = 0.0;
-	//ˆ—ŠÔ‚É—]—T‚ª‚ ‚éê‡‚Í‚»‚Ì•ª‘Ò‚Â
+	//å‡¦ç†æ™‚é–“ã«ä½™è£•ãŒã‚ã‚‹å ´åˆã¯ãã®åˆ†å¾…ã¤
 	if (mFrameTime < FRAME_TIME)
 	{
-		//Sleep‚ÌŠÔ‚ğŒvZ
+		//Sleepã®æ™‚é–“ã‚’è¨ˆç®—
 		DWORD sleepTime = static_cast<DWORD>((FRAME_TIME - mFrameTime) * 1000);
 		timeBeginPeriod(1);
-		//Q‚é
+		//å¯ã‚‹
 		Sleep(sleepTime);
 		timeEndPeriod(1);
 	}
 	else 
 	{
 		fps = 1 / mFrameTime;
-		mTimeStart = mTimeEnd;
 
-		//FPS‚ğo—Í‘‹‚Éo‚·
+		//FPSã‚’å‡ºåŠ›çª“ã«å‡ºã™
 #ifdef _DEBUG
 #ifdef UNICODE
 		std::wstringstream stream;
@@ -37,5 +36,6 @@ double TimeBaseLoopExecuter::TimeAdjustment()
 		}
 #endif // _DEBUG
 	}
+	mTimeStart = mTimeEnd;
 	return fps;
 }
