@@ -10,21 +10,20 @@ class TimeBaseLoopExecuter
 public:
 	TimeBaseLoopExecuter(double frame = 60.0):FRAME_TIME(1.0f / frame)
 	{
-		//ü”g”æ“¾
+		//å‘¨æ³¢æ•°å–å¾—
 		QueryPerformanceFrequency(&mTimeFreq);
-		//Œv‘ªŠJnŠÔ‚Ì‰Šú‰»
+		//è¨ˆæ¸¬é–‹å§‹æ™‚é–“ã®åˆæœŸåŒ–
 		QueryPerformanceCounter(&mTimeStart);
 	}
-	//FPS‚ğŒÅ’è‚·‚é‚½‚ßˆ—ŠÔ‚É—]—T‚ª‚ ‚éê‡‚»‚Ì•ª‘Ò‚Â
+	//FPSã‚’å›ºå®šã™ã‚‹ãŸã‚å‡¦ç†æ™‚é–“ã«ä½™è£•ãŒã‚ã‚‹å ´åˆãã®åˆ†å¾…ã¤
 	double TimeAdjustment();
 private:
 	const double FRAME_TIME = 0.0;
-	double mFrameTime = 0.0;
-	//Œv‘ªŠJnŠÔ
+	//è¨ˆæ¸¬é–‹å§‹æ™‚é–“
 	LARGE_INTEGER mTimeStart;
-	//Œv‘ªI—¹ŠÔ
+	//è¨ˆæ¸¬çµ‚äº†æ™‚é–“
 	LARGE_INTEGER mTimeEnd;
-	//Œv‘ªü”g”
+	//è¨ˆæ¸¬å‘¨æ³¢æ•°
 	LARGE_INTEGER mTimeFreq;
 
 #ifdef _DEBUG
